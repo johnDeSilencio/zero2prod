@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: Email Newsletter Subscription API
+  description: >
+    This API supports the two following user scenarios:
+
+    As a blog visitor,
+    I want to subscribe to the newsletter,
+    So that I can receive email updates when new content is published on the blog
+
+    As the blog author,
+    I want to send an email to all my subscribers,
+    So that I can notify them when new content is published.
+
+    Unsupported behavior:
+    - Unsubscribing from the email newsletter
+    - Managing more than one newsletter
+    - Segment groups of subscribers into multiple audiences
+    - Track email user opening rates and click rates
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.txt
+  version: 1.0.0
+
+# Route authorization and authentication not yet supported
+security: []
+
+servers:
+  - url: http://{host}:{port}/{version}
+    description: Development server
+    variables:
+      host:
+        enum:
+        - 127.0.0.1
+        - localhost
+        default: localhost
+        description: The host IP address for the development server
+      port:
+        default: "8000"
+        description: The port for the development server
+      version:
+        default: v1
+        description: The base route for the newsletter API
+
+paths:
+  /health_check:
+    get:
+      operationId: getHealthCheck
+      tags:
+        - general
+      summary: >
+        Health check endpoint to verify that the API is available
+      description: >
+        This endpoint can be used to verify that the application is up and ready
+        to accept incoming requests. This endpoint can be used to automate
+        receiving alerts if the API goes down.
+      responses:
+        "200":
+          description: OK
+        "418":
+          description: I'm a teapot 🫖

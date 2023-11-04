@@ -1,0 +1,16 @@
+name: OpenAPI Swagger Specification
+
+on: [push, pull_request]
+
+jobs:
+  openapi:
+    name: OpenAPI Swagger Specification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: openapi-lint 
+        uses: mhiew/redoc-lint-github-action@v3
+        with:
+          args: 'docs/swagger.yaml'
