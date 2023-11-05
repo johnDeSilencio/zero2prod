@@ -59,3 +59,57 @@ paths:
           description: OK
         "418":
           description: I'm a teapot 🫖
+  /subscriptions:
+    post:
+      operationId: postSubscriptions
+      tags:
+        - subscriptions
+      summary: >
+        Register a new subscriber to the email newsletter
+      description: >
+        Registers the new subscriber's name and email to the newsletter. After
+        registering a valid email, the user will begin receiving newsletters
+        emails.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscriptionsPostRequest"
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      description: Returned for invalid requests
+      properties:
+        message:
+          type: string
+          description: The error message associated with the bad request
+          example: Bad request
+      required:
+        - message
+    SubscriptionsPostRequest:
+      type: object
+      description: The data required to register a new subscriber
+      properties:
+        name:
+          type: string
+          description: The name of the newsletter subscriber
+          example: Joanna Smith
+        email:
+          type: string
+          description: RFC-5322 compliant email address
+          example: jsmith@example.com
+      required:
+        - name
+        - email
