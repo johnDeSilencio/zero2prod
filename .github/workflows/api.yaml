@@ -3,7 +3,7 @@ name: OpenAPI Swagger Specification
 on: [push, pull_request]
 
 jobs:
-  openapi:
+  lint:
     name: OpenAPI Swagger Specification
     runs-on: ubuntu-latest
     steps:
