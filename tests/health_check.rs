@@ -27,7 +27,7 @@ fn spawn_app() -> String {
         .expect("Failed to receive socket address to random port")
         .port();
 
-    let server = zero2prod::run(listener).expect("Failed to bind to bind address");
+    let server = zero2prod::startup::run(listener).expect("Failed to bind to bind address");
     let _ = tokio::spawn(server);
 
     format!("http://localhost:{}", port)
