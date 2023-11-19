@@ -1,3 +1,5 @@
+// cspell:ignore reqwest nrsmith
+
 use std::net::TcpListener;
 
 #[tokio::test]
@@ -38,7 +40,7 @@ async fn subscribe_returns_200_for_valid_form_data() {
     let client = reqwest::Client::new();
 
     // Act
-    let body = "name=Nicholas%20R.%20Smith&nrsmith%40example.com";
+    let body = "name=Nicholas%20R.%20Smith&email=nrsmith%40example.com";
     let response = client
         .post(&format!("{}/v1/subscriptions", &app_address))
         .header("Content-Type", "application/x-www-form-urlencoded")
