@@ -1,11 +1,14 @@
 use std::net::TcpListener;
-
-const APP_PORT: u16 = 8000;
+use zero2prod::startup::run;
+use zero2prod::configuration::get_configuration;
 
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {
-    let listener = TcpListener::bind(format!("localhost:{}", APP_PORT))
-        .unwrap_or_else(|_| panic!("Failed to bind to port {}", APP_PORT));
+    // Panic if we can't read configuration
+    let config = get_configuration().expect("Failed to read configuration");
 
-    zero2prod::startup::run(listener)?.await
+    let listener = TcpListener::bind(format!("localhost:{}", config.application_port))
+        .unwrap_or_else(|_| panic!("Failed to bind to port {}", config.application_port));
+
+    run(listener)?.await
 }
