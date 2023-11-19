@@ -1,2 +1,8 @@
+# Compiled binaries and test coverage
 /target
+
+# Mac OSX specific files
 .DS_Store
+
+# Avoid leaking secrets
+configuration.yaml
